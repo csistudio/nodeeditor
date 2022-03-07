@@ -71,29 +71,34 @@ endif()
 # We'll have to manually specify some files
 set(CMAKE_AUTOMOC ON)
 
-set(CPP_SOURCE_FILES
-  src/Connection.cpp
-  src/ConnectionBlurEffect.cpp
-  src/ConnectionGeometry.cpp
-  src/ConnectionGraphicsObject.cpp
-  src/ConnectionPainter.cpp
-  src/ConnectionState.cpp
-  src/ConnectionStyle.cpp
-  src/DataModelRegistry.cpp
-  src/FlowScene.cpp
-  src/FlowView.cpp
-  src/FlowViewStyle.cpp
-  src/Node.cpp
-  src/NodeConnectionInteraction.cpp
-  src/NodeDataModel.cpp
-  src/NodeGeometry.cpp
-  src/NodeGraphicsObject.cpp
-  src/NodePainter.cpp
-  src/NodeState.cpp
-  src/NodeStyle.cpp
-  src/Properties.cpp
-  src/StyleCollection.cpp
-)
+file(GLOB_RECURSE CPP_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/nodes/internal/*.hpp)
+
+# qt5_wrap_cpp(qan_source_files, qan_header_files)
+
+# set(CPP_SOURCE_FILES
+#   src/Connection.cpp
+#   src/ConnectionBlurEffect.cpp
+#   src/ConnectionGeometry.cpp
+#   src/ConnectionGraphicsObject.cpp
+#   src/ConnectionPainter.cpp
+#   src/ConnectionState.cpp
+#   src/ConnectionStyle.cpp
+#   src/DataModelRegistry.cpp
+#   src/FlowScene.cpp
+#   src/FlowView.cpp
+#   src/FlowViewStyle.cpp
+#   src/Node.cpp
+#   src/NodeConnectionInteraction.cpp
+#   src/NodeDataModel.cpp
+#   src/NodeGeometry.cpp
+#   src/NodeGraphicsObject.cpp
+#   src/NodePainter.cpp
+#   src/NodeState.cpp
+#   src/NodeStyle.cpp
+#   src/Properties.cpp
+#   src/StyleCollection.cpp
+# )
 
 set(HPP_HEADER_FILES
   include/nodes/internal/Compiler.hpp
@@ -129,6 +134,7 @@ set(HPP_HEADER_FILES
 # If we want to give the option to build a static library,
 # set BUILD_SHARED_LIBS option to OFF
 add_library(nodes
+  STATIC
   ${CPP_SOURCE_FILES}
   ${HPP_HEADER_FILES}
   ${RESOURCES}
@@ -154,9 +160,10 @@ target_link_libraries(nodes
 
 target_compile_definitions(nodes
   PUBLIC
-    NODE_EDITOR_SHARED
+  NODE_EDITOR_STATIC
+    # NODE_EDITOR_SHARED
   PRIVATE
-    NODE_EDITOR_EXPORTS
+    # NODE_EDITOR_EXPORTS
     #NODE_DEBUG_DRAWING
     QT_NO_KEYWORDS
 )
