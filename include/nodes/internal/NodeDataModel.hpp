@@ -28,6 +28,8 @@ class Connection;
 
 class StyleCollection;
 
+enum { NT_UNKNOWN = -1, NT_EXT_INLET = 0, NT_WSR = 1, NT_PFR = 2 };
+
 class NODE_EDITOR_PUBLIC NodeDataModel
   : public QObject
   , public Serializable
@@ -45,6 +47,10 @@ public:
   virtual QString
   caption() const = 0;
 
+  //Can add parameter std::string requestedInfo which we can set to be "inlet_temperature", "reactor_type", "volume", etc..
+  //this way if we need to show more info about the node we can just call this overridden method with what we need
+  virtual QString extraInfo(int reactorType) { return ""; }
+
   /// It is possible to hide caption in GUI
   virtual bool
   captionVisible() const { return true; }
@@ -61,6 +67,9 @@ public:
   virtual QString
   name() const = 0;
 
+  virtual int
+  nodeType() const { return NT_UNKNOWN; }
+
 public:
 
   QJsonObject
@@ -74,8 +83,7 @@ public:
   virtual
   NodeDataType dataType(PortType portType, PortIndex portIndex) const = 0;
 
-public:
-
+public:   
   enum class ConnectionPolicy
   {
     One,
@@ -154,6 +162,9 @@ public:
   virtual
   NodePainterDelegate* painterDelegate() const { return nullptr; }
 
+  virtual
+  bool dataEdited() { return edited; }
+
 public Q_SLOTS:
 
   virtual void
@@ -197,5 +208,6 @@ Q_SIGNALS:
 private:
 
   NodeStyle _nodeStyle;
+  bool edited = false;
 };
 }
