@@ -74,7 +74,6 @@ set(CMAKE_AUTOMOC ON)
 file(GLOB_RECURSE CPP_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/nodes/internal/*.hpp)
 
-file(GLOB_RECURSE RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/resources/*.qrc)
 # qt5_wrap_cpp(qan_source_files, qan_header_files)
 
 # set(CPP_SOURCE_FILES
