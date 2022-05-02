@@ -219,17 +219,17 @@ target_sources(nodes PRIVATE ${nodes_moc})
 # Examples
 ##
 
-if(BUILD_EXAMPLES)
-  add_subdirectory(examples)
-endif()
+# if(BUILD_EXAMPLES)
+#   add_subdirectory(examples)
+# endif()
 
 ##################
 # Automated Tests
 ##
 
-if(BUILD_TESTING)
-  add_subdirectory(test)
-endif()
+# if(BUILD_TESTING)
+#   add_subdirectory(test)
+# endif()
 
 ###############
 # Installation
