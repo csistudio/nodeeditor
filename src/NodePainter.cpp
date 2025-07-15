@@ -109,7 +109,7 @@ drawNodeRect(QPainter* painter,
       painter->drawPixmap(boundary, pfrNode);
   }
   else {
-      QPixmap inletNode(":/images/2_gas-turbines-d.svg");
+      QPixmap inletNode(":/images/browse_forward.png");
       painter->drawPixmap(boundary, inletNode);
   }
 }
